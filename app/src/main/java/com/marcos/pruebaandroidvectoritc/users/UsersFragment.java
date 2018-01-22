@@ -37,6 +37,12 @@ public class UsersFragment extends Fragment implements UsersContract.View {
     private MainActivity mainActivity;
     private UsersAdapter usersAdapter;
     private UsersContract.Presenter presenter;
+    private UsersAdapter.ItemClickListener itemClickListener = new UsersAdapter.ItemClickListener() {
+        @Override
+        public void onClick(View view, String username) {
+            mainActivity.navigateToDetails(username);
+        }
+    };
 
     public UsersFragment() {
         // Required empty public constructor
@@ -55,7 +61,7 @@ public class UsersFragment extends Fragment implements UsersContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        usersAdapter = new UsersAdapter(getContext(), new ArrayList<User>(0));
+        usersAdapter = new UsersAdapter(getContext(), itemClickListener, new ArrayList<User>(0));
     }
 
     @Override

@@ -41,4 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         UsersPresenter mainPresenter = new UsersPresenter(usersRepository, usersFragment);
     }
+
+    public void navigateToDetails(String username) {
+
+    }
 }

@@ -24,11 +24,13 @@ import butterknife.ButterKnife;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
+    private final ItemClickListener itemClickListener;
     List<User> users;
     Context context;
 
-    public UsersAdapter(Context context, List<User> users) {
+    public UsersAdapter(Context context, ItemClickListener itemClickListener, List<User> users) {
         this.context = context;
+        this.itemClickListener = itemClickListener;
         this.users = users;
     }
 
@@ -40,7 +42,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item_layout, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, itemClickListener);
 
         return viewHolder;
     }
@@ -48,6 +50,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         User user = users.get(position);
+
+        holder.user = user;
 
         holder.tvUserName.setText(user.getName());
         holder.tvUserUrl.setText(user.getUrl());
@@ -63,8 +67,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         return users.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public interface ItemClickListener {
+        void onClick(View view, String username);
+    }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final ItemClickListener itemClickListener;
+        private String username;
         public User user;
 
         @BindView(R.id.iv_user_avatar)
@@ -76,9 +86,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         @BindView(R.id.tv_user_url)
         TextView tvUserUrl;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, ItemClickListener itemClickListener) {
             super(itemView);
+            this.itemClickListener = itemClickListener;
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+            username = user.getName();
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, username);
         }
     }
 }
