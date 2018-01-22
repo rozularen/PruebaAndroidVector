@@ -9,7 +9,13 @@ import java.util.List;
  */
 
 public interface UsersDataSource {
-    List<User> getUsers();
+    void getUsers(LoadUsersCallback callback);
 
-    User getUser(int id);
+    void getUser(int id);
+
+    interface LoadUsersCallback {
+        void onUsersLoaded(List<User> users);
+
+        void onError();
+    }
 }

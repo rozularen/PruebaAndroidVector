@@ -1,12 +1,17 @@
 package com.marcos.pruebaandroidvectoritc.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by markc on 22/01/2018.
  */
 
 public class User {
+    @SerializedName("login")
     String name;
+    @SerializedName("html_url")
     String url;
+    @SerializedName("avatar_url")
     String gravatarUrl;
     String company;
     String location;

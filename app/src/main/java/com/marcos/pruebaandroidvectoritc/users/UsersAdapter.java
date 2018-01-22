@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import com.marcos.pruebaandroidvectoritc.R;
 import com.marcos.pruebaandroidvectoritc.data.User;
+import com.marcos.pruebaandroidvectoritc.util.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by markc on 22/01/2018.
@@ -51,6 +53,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         holder.tvUserUrl.setText(user.getUrl());
         Picasso.with(context)
                 .load(user.getGravatarUrl())
+                .transform(new CircleTransform())
                 .into(holder.ivUserAvatar);
 
     }
@@ -75,6 +78,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

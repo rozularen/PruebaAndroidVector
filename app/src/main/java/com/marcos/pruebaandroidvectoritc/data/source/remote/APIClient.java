@@ -16,7 +16,7 @@ public class APIClient {
     private static Retrofit retrofit = null;
 
     static Retrofit getClient() {
-        String baseUrl = "https://hello-world.innocv.com/api/user/";
+        String baseUrl = "https://api.github.com/";
 
         if (retrofit == null) {
 

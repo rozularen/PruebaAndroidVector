@@ -27,9 +27,22 @@ public class UsersRepository implements UsersDataSource {
     }
 
     @Override
-    public List<User> getUsers() {
-        return null;
+    public void getUsers(final LoadUsersCallback callback) {
+        remoteDataSource.getUsers(new LoadUsersCallback() {
+            @Override
+            public void onUsersLoaded(List<User> users) {
+                callback.onUsersLoaded(users);
+            }
+
+            @Override
+            public void onError() {
+                callback.onError();
+            }
+        });
     }
 
+    @Override
+    public void getUser(int id) {
 
+    }
 }
