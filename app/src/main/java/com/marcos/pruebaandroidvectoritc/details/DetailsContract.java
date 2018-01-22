@@ -14,9 +14,10 @@ public class DetailsContract {
 
         void showLoadUserError();
 
+        void setLoadingIndicator(boolean isLoading);
     }
     interface Presenter {
         void start();
-        void onStop();
+        void onDestroy();
     }
 }

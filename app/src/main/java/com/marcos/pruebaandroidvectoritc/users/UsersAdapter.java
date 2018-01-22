@@ -51,7 +51,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         User user = users.get(position);
 
-        holder.user = user;
+        holder.setUser(user);
 
         holder.tvUserName.setText(user.getName());
         holder.tvUserUrl.setText(user.getUrl());
@@ -91,6 +91,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             this.itemClickListener = itemClickListener;
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+        }
+
+        public void setUser(User user) {
+            this.user = user;
             username = user.getName();
         }
 

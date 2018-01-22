@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.marcos.pruebaandroidvectoritc.MainActivity">
 
@@ -11,9 +11,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="#ffffff"
+        android:background="@color/colorPrimary"
         android:elevation="8dp"
-        android:background="@color/colorPrimary" />
+        style="@style/MyApp.ActionBarTheme"
+        app:elevation="8dp"
+        app:titleTextColor="#ffffff" />
 
     <FrameLayout
         android:id="@+id/container"

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         navigateToMain();
     }
 
-    private void navigateToMain() {
+    public void navigateToMain() {
         UsersFragment usersFragment = UsersFragment.newInstance();
 
         getSupportFragmentManager()
@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
     public void navigateToDetails(String username) {
         DetailsFragment detailsFragment = DetailsFragment.newInstance(username);
         UsersRemoteDataSource remoteDataSource = UsersRemoteDataSource.getInstance();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, detailsFragment)
+                .addToBackStack(null)
+                .commit();
 
         UsersRepository usersRepository = UsersRepository.getInstance(remoteDataSource);
         DetailsPresenter detailsPresenter = new DetailsPresenter(username, usersRepository, detailsFragment);

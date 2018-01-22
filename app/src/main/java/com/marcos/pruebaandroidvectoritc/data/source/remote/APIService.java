@@ -17,6 +17,6 @@ public interface APIService {
     @GET("users")
     Call<List<User>> getUsers();
 
-    @GET("user/{username}")
+    @GET("users/{username}")
     Call<User> getUser(@Path("username") String username);
 }

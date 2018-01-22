@@ -22,12 +22,12 @@ public class User {
     int following;
     int publicRepos;
     int publicGists;
+    @SerializedName("created_at")
     String registrationDate;
+    @SerializedName("updated_at")
     String updateDate;
     boolean hireable;
     String bio;
-
-
 
 
     public String getName() {
