@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="8dp"
-        style="@style/MyApp.ActionBarTheme"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:elevation="8dp"
         app:titleTextColor="#ffffff" />
 

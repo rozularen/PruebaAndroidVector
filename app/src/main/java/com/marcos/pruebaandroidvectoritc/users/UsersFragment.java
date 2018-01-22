@@ -69,9 +69,7 @@ public class UsersFragment extends Fragment implements UsersContract.View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
         ButterKnife.bind(this, view);
-
         mainActivity = (MainActivity) getActivity();
 
         ActionBar supportActionBar = mainActivity.getSupportActionBar();

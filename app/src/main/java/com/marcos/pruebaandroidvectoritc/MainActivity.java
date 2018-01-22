@@ -46,15 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigateToDetails(String username) {
         DetailsFragment detailsFragment = DetailsFragment.newInstance(username);
-        UsersRemoteDataSource remoteDataSource = UsersRemoteDataSource.getInstance();
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, detailsFragment)
-                .addToBackStack(null)
+                .addToBackStack(DetailsFragment.TAG)
                 .commit();
 
+        UsersRemoteDataSource remoteDataSource = UsersRemoteDataSource.getInstance();
+
         UsersRepository usersRepository = UsersRepository.getInstance(remoteDataSource);
+
         DetailsPresenter detailsPresenter = new DetailsPresenter(username, usersRepository, detailsFragment);
     }
 }

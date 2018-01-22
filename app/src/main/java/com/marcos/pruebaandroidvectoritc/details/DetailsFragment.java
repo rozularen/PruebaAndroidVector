@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import butterknife.ButterKnife;
  */
 public class DetailsFragment extends Fragment implements DetailsContract.View {
 
+    public static final String TAG = "DetailsFragment";
     @BindView(R.id.pb_details_loading_indicator)
     ProgressBar pbDetailsLoadingIndicator;
     @BindView(R.id.details_container_layout)
@@ -96,9 +99,9 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         mainActivity = (MainActivity) getActivity();
 
         ActionBar supportActionBar = mainActivity.getSupportActionBar();
-        supportActionBar.setTitle(username);
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
         supportActionBar.setDisplayShowHomeEnabled(true);
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        supportActionBar.setTitle(username);
         return view;
     }
 
@@ -109,14 +112,18 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                mainActivity.navigateToMain();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                Toast.makeText(getContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+                break;
         }
+        return true;
     }
 
     @Override
