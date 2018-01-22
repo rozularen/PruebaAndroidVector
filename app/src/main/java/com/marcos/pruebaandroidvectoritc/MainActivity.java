@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import com.marcos.pruebaandroidvectoritc.data.source.UsersDataSource;
 import com.marcos.pruebaandroidvectoritc.data.source.UsersRepository;
 import com.marcos.pruebaandroidvectoritc.data.source.remote.UsersRemoteDataSource;
+import com.marcos.pruebaandroidvectoritc.details.DetailsFragment;
+import com.marcos.pruebaandroidvectoritc.details.DetailsPresenter;
 import com.marcos.pruebaandroidvectoritc.users.UsersFragment;
 import com.marcos.pruebaandroidvectoritc.users.UsersPresenter;
 
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void navigateToDetails(String username) {
+        DetailsFragment detailsFragment = DetailsFragment.newInstance(username);
+        UsersRemoteDataSource remoteDataSource = UsersRemoteDataSource.getInstance();
 
+        UsersRepository usersRepository = UsersRepository.getInstance(remoteDataSource);
+        DetailsPresenter detailsPresenter = new DetailsPresenter(username, usersRepository, detailsFragment);
     }
 }

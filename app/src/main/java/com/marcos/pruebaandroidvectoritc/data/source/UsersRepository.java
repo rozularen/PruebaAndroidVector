@@ -42,7 +42,17 @@ public class UsersRepository implements UsersDataSource {
     }
 
     @Override
-    public void getUser(int id) {
+    public void getUser(String username, final LoadUserCallback callback) {
+        remoteDataSource.getUser(username, new LoadUserCallback() {
+            @Override
+            public void onUserLoaded(User user) {
+                callback.onUserLoaded(user);
+            }
 
+            @Override
+            public void onError() {
+                callback.onError();
+            }
+        });
     }
 }

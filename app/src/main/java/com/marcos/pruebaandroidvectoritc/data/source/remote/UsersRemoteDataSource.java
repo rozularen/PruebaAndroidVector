@@ -1,5 +1,7 @@
 package com.marcos.pruebaandroidvectoritc.data.source.remote;
 
+import android.util.Log;
+
 import com.marcos.pruebaandroidvectoritc.data.User;
 import com.marcos.pruebaandroidvectoritc.data.source.UsersDataSource;
 
@@ -40,9 +42,14 @@ public class UsersRemoteDataSource implements UsersDataSource {
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                List<User> users = response.body();
+                if (response.code() == 200) {
+                    List<User> users = response.body();
 
-                callback.onUsersLoaded(users);
+                    callback.onUsersLoaded(users);
+                } else {
+                    Log.e(TAG, "onResponse: Request returned code " + response.code());
+                    callback.onError();
+                }
             }
 
             @Override
@@ -53,7 +60,28 @@ public class UsersRemoteDataSource implements UsersDataSource {
     }
 
     @Override
-    public void getUser(int id) {
+    public void getUser(String username, final LoadUserCallback callback) {
+        Call<User> call = apiService.getUser(username);
 
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+                    User user = response.body();
+
+                    callback.onUserLoaded(user);
+                } else {
+                    Log.e(TAG, "onResponse: Request returned code " + response.code());
+                    callback.onError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onError();
+            }
+        });
     }
+
+
 }

@@ -11,10 +11,16 @@ import java.util.List;
 public interface UsersDataSource {
     void getUsers(LoadUsersCallback callback);
 
-    void getUser(int id);
+    void getUser(String username, LoadUserCallback callback);
 
     interface LoadUsersCallback {
         void onUsersLoaded(List<User> users);
+
+        void onError();
+    }
+
+    interface LoadUserCallback {
+        void onUserLoaded(User user);
 
         void onError();
     }
